@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admission Form</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <center class="display-4">Admission Form</center>
+
+            <h4>Presonal Details</h4>
+            <form class="" action="" method="Post">
+                <div class="row">
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" class="form-control" name="fnam" id="fnam" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control" name="lnam" id="lnam">
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Father's Name</label>
+                            <input type="text" class="form-control" name="fanam" id="fanam" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Mother's Name</label>
+                            <input type="text" name="mnam" id="mnam" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="date" name="dob" id="dob" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Catogery</label>
+                            <select class="form-control" name="cat" id="cat">
+                                <option value="general">General</option>
+                                <option value="obc">OBC</option>
+                                <option value="sc">SC</option>
+                                <OPTION value="st">ST</OPTION>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 col-sm-4">
+                        <div class="">
+                            <label>Gender</label><br>	
+                            <label class="radio-inline"><input type="radio" name="g" id="g" value="m" class="" required checked="true" >  Male</label>
+                            <label class="radio-inline"><input type="radio" name="g" id="g" value="f" class="" >  Female</label>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-md-4">
+                        <label>Disability</label>
+                        <div class="radio">
+                            <label class="radio-inline"><input type="radio" name="dis" id="dis" value="yes">  Yes</label>
+                            <label class="radio-inline"><input type="radio" name="dis" id="dis" value="no" checked="true">  No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Contact Details</h4>
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="semail" id="semail">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Mobile No.</label>
+                            <input type="number" class="form-control" name="smob" id="smob" >
+                        </div>
+                    </div>
+
+                </div>
+                <input type="button" class="btn btn-primary" id="empSave" value="Submit"
+                       onclick="savestudent();">
+                <script>
+                    $("#fnam").focus();
+                    function validateAndGetFormData() {
+                        var fname = $("#fnam").val();
+                        if (fname === "") {
+                            alert("First name Required Value");
+                            $("#fnam").focus();
+                            return "";
+                        }
+                        var lname = $("#lnam").val();
+                        var faname = $("#fanam").val();
+                        if (faname === "") {
+                            alert("Father Name is Required Value");
+                            $("#fanam").focus();
+                            return "";
+                        }
+                        var mname = $("#mnam").val();
+                        if (mname === "") {
+                            alert("Mother Name is Required Value");
+                            $("#mnam").focus();
+                            return "";
+                        }
+                        var dateob = $("#dob").val();
+                        if (dateob === "") {
+                            alert("Date of Birth is Required Value");
+                            $("#dob").focus();
+                            return "";
+                        }
+                        var catvar = $("#cat").val();
+                        var gen = $("#g").val();
+                        var disable = $("#dis").val();
+                        var email = $("#semail").val();
+                        if (email === "") {
+                            alert("Student Email is Required Value");
+                            $("#semail").focus();
+                            return "";
+                        }
+                        var mobile = $("#smob").val();
+                        if (mobile === "") {
+                            alert("Mobile No. is Required Value");
+                            $("#smob").focus();
+                            return "";
+                        }
+                        var jsonStrObj = {
+                            FirstN: fname,
+                            LastN: lname,
+                            FatherN: faname,
+                            MotherN: mname,
+                            DOB: dateob,
+                            Catogry: catvar,
+                            Gender: gen,
+                            Diability: disable,
+                            Email: email,
+                            Mobile: mobile,
+                        };
+                        return JSON.stringify(jsonStrObj);
+                    }
+                    
+                    function resetForm() {
+                        $("#fnam").val("")
+                        $("#lnam").val("");
+                        $("#fanam").val("");
+                        $("#mnam").val("");
+                        $("#dob").val("");
+                        $("#semail").val("");
+                        $("#smob").val("");
+                        $("#fnam").focus();
+                    }
+                    function savestudent() {
+                        var jsonStr = validateAndGetFormData();
+                        if (jsonStr === "") {
+                            return;
+                        }
+                        var putReqStr = createPUTRequest("90938954|-31949289431017261|90940685",
+                                jsonStr, "Admission", "Stu-Det");
+                        alert(putReqStr);
+                        jQuery.ajaxSetup({async: false});
+                        var resultObj = executeCommandAtGivenBaseUrl(putReqStr,
+                                "http://api.login2explore.com:5577", "/api/iml");
+                        alert(JSON.stringify(resultObj));
+                        jQuery.ajaxSetup({async: true});
+                        resetForm();
+                    }
+                </script>
+            </form>
+        </body>
+        </html>
